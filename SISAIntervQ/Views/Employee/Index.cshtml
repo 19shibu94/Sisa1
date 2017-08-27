@@ -1,0 +1,152 @@
+﻿@model IEnumerable<SISAIntervQ.Models.Employee2>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="hr_ms col-lg-6 col-sm-6">
+        <label class="control-label col-lg-4 col-sm-3"> Name<span class="text-danger">*</span></label>
+        <div class="col-lg-8 col-sm-6">
+            @*<select>
+                    <option>
+                        Kaula Lumpur
+                    </option>
+                    <option>
+                        Johor
+                    </option>
+                    <option>
+                        Malacca
+                    </option>
+                    <option>
+                        perak
+                    </option>
+                </select>*@
+            @Html.DropDownList("model", (IEnumerable<SelectListItem>)ViewBag.NameList, "--Select Branch--", new { @id = "IDNameId", @class = "form-control" })
+
+
+        </div>
+    </div>
+}
+<br /><br />
+<div id="div1"></div>
+
+<table id="Education_Table" class="table table-striped table-bordered dataTable-length" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegisterId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </th>
+
+    @*@if (ViewBag.first != 0)
+    {*@ 
+            <th>Action</th>
+    @*}*@
+        </tr>
+    </thead>
+    <tbody id="education_details">
+        @{
+            if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RegisterId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Mobile)
+                        </td>
+
+
+                        @{
+                    if (ViewBag.first != 0)
+                    {
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "Employee", new { p = item.Id }, null)
+                            
+                        </td>
+                    }
+
+                        }
+
+                    </tr>
+                }
+            }
+
+        }
+    </tbody>
+</table>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+@*<script src="~/Scripts/Js/jquery-3.1.1.min.js"></script>*@
+<script src="~/Scripts/Js/chosen.jquery.min.js"></script>
+
+<script src="~/Scripts/Js/jquery.dataTables.js"></script>
+<script src="~/Scripts/Js/dataTables.bootstrap.js"></script>
+@*<script src="~/Scripts/Js/tables-datatables.js"></script>*@
+<script>
+
+
+    $("#IDNameId").change(function () {
+        debugger;
+        var x = $("#IDNameId option:selected").val();
+        $.ajax({
+            url: "/Employee/NameList",
+            type: "POST",
+            data: JSON.stringify({ 'NameCode': x }),
+            dataType: "json",
+            traditional: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (Data) {
+                debugger;
+                var table = $("#Education_Table").DataTable();
+                table.clear().draw();
+
+             
+
+
+                var edit ='<a href="@Url.Action("Edit")?p=' + Data.Id + '">Start Edit</a>';
+
+                var rowNode = table.row.add([
+                    Data.Id,
+                    Data.Name,
+                    Data.RegisterId,
+                    Data.Mobile,
+                       edit
+                ]);
+
+                table.draw();
+                // $('#education_details').html(Data);
+
+            }
+
+        })
+    });
+
+   
+</script>
