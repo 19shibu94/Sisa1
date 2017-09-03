@@ -24,7 +24,7 @@ namespace SISAIntervQ.Repository
         {
             var p = new DynamicParameters();
 
-          //  p.Add("name", name);
+            //  p.Add("name", name);
             const string storedProcedure = "NameList_GetList";
             var ret = con.Query<Employee2>(storedProcedure, commandType: CommandType.StoredProcedure);
             return ret;
@@ -45,11 +45,11 @@ namespace SISAIntervQ.Repository
 
             p.Add("NameCode", NameCode);
             const string storedProcedure = "Emp_GetListSingle";
-            var ret = con.Query<Employee2>(storedProcedure, p,commandType: CommandType.StoredProcedure);
+            var ret = con.Query<Employee2>(storedProcedure, p, commandType: CommandType.StoredProcedure);
             return ret;
 
         }
-        public Int64 UpdateMethod(Employee2 employee2,int id)
+        public Int64 UpdateMethod(Employee2 employee2, int id)
         {
             var p = new DynamicParameters();
 
@@ -62,6 +62,16 @@ namespace SISAIntervQ.Repository
             var ret = con.Query<Employee2>(storedProcedure, p, commandType: CommandType.StoredProcedure);
             long Result = p.Get<long>("Result");
             return Result;
+        }
+        public IEnumerable<Employee2> GetMethod(int n)
+        {
+            var p = new DynamicParameters();
+
+            p.Add("Id", n);
+           
+            const string storedProcedure = "Emp_Get";
+            var ret = con.Query<Employee2>(storedProcedure, p, commandType: CommandType.StoredProcedure);
+            return ret;
         }
     }
 }

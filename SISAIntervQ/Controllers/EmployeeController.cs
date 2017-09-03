@@ -41,13 +41,11 @@ namespace SISAIntervQ.Controllers
             
         }
 
-        public JsonResult NameList(int NameCode)
+        public ActionResult NameList(int NameCode)
         {
-            Employee2 emp2 = new Employee2();
-            emp2 = _stateRepo.GetListSingle(NameCode).SingleOrDefault();
-            ViewBag.first = 1;
-            //return RedirectToAction("Index", new { p = NameCode });
-            return Json(emp2, JsonRequestBehavior.AllowGet);
+
+
+            return RedirectToAction("Index", new { p = NameCode });
         }
 
 
@@ -80,23 +78,20 @@ namespace SISAIntervQ.Controllers
         }
 
         // GET: Employee/Edit/5
-        public ActionResult Edit(int p)
+        public ActionResult Edit(int id)
         {
-           Employee2 employee2 = new Employee2();
-            employee2= _stateRepo.GetMethod(p).SingleOrDefault();
-            return View(employee2);
+            return View();
         }
 
         // POST: Employee/Edit/5
         [HttpPost]
-        public ActionResult Edit(int p, Employee2 employee2)
+        public ActionResult Edit(int id, Employee2 employee2)
         {
             try
             {
-               Int64 res= _stateRepo.UpdateMethod(employee2,p);
+               Int64 res= _stateRepo.UpdateMethod(employee2,id);
 
-             //  return RedirectToAction("Index", new { p = 0 });
-               return RedirectToAction("Index", "Employee", new { p = 0 });
+               return RedirectToAction("Index", new { p = 0 });
             }
             catch
             {

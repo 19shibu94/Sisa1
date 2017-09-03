@@ -13,5 +13,6 @@ namespace SISAIntervQ.Interface
         IEnumerable<Employee2> GetList();
         IEnumerable<Employee2> GetListSingle(int NameCode);
         Int64 UpdateMethod(Employee2 employee2 ,int id);
+        IEnumerable<Employee2>  GetMethod(int p);
     }
 }

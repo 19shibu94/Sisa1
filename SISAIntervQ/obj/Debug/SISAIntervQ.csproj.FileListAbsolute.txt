@@ -58,4 +58,3 @@ F:\oficLapBack\C# practice\InterviewLevel\SISAIntervQ\SISAIntervQ\bin\Microsoft.
 F:\oficLapBack\C# practice\InterviewLevel\SISAIntervQ\SISAIntervQ\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 F:\oficLapBack\C# practice\InterviewLevel\SISAIntervQ\SISAIntervQ\obj\Debug\SISAIntervQ.dll
 F:\oficLapBack\C# practice\InterviewLevel\SISAIntervQ\SISAIntervQ\obj\Debug\SISAIntervQ.pdb
-F:\oficLapBack\C# practice\InterviewLevel\SISAIntervQ\SISAIntervQ\obj\Debug\SISAIntervQ.csprojResolveAssemblyReference.cache
